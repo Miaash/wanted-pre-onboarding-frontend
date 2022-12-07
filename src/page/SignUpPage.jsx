@@ -2,16 +2,23 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import styled from "styled-components";
-
 import axios from "axios";
 
 const SignPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [emailError, setEmailError] = useState(false);
   const [passwordError, setPassWordError] = useState(false);
   const navigate = useNavigate();
   const emailInput = (e) => {
     setEmail(e.target.value);
+    const regExp =
+      /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+    if (regExp.test(e.target.value)) {
+      setEmailError(true);
+    } else {
+      setEmailError(false);
+    }
   };
 
   const passwordInput = (e) => {
@@ -57,6 +64,11 @@ const SignPage = () => {
                 placeholder="이메일을 입력하세요"
                 onChange={emailInput}
               />
+              {emailError ? (
+                <p className="correct">올바른 형식입니다.</p>
+              ) : (
+                <p className="wrong">이메일 형식에 맞지 않습니다.</p>
+              )}
             </EmailBox>
             <PasswordBox>
               <label htmlFor="Password">비밀번호</label>
@@ -72,7 +84,13 @@ const SignPage = () => {
                 <p className="wrong">8자 이상 입력해주세요.</p>
               )}
             </PasswordBox>
-            <Button>회원가입</Button>
+            {passwordError && emailError ? (
+              <Button>회원가입</Button>
+            ) : (
+              <Button disabled={true} style={{ cursor: "no-drop" }}>
+                회원가입
+              </Button>
+            )}
           </LoginForm>
         </LoginBox>
       </MainWrapper>
@@ -114,11 +132,18 @@ const LoginForm = styled.form``;
 
 const EmailBox = styled.div`
   margin-top: 5px;
+  .correct {
+    color: green;
+    font-size: 13px;
+  }
+  .wrong {
+    color: red;
+    font-size: 13px;
+  }
 `;
 
 const PasswordBox = styled.div`
   margin-top: 20px;
-
   .correct {
     color: green;
     font-size: 13px;
@@ -135,16 +160,5 @@ const Button = styled.button`
   :hover {
     background-color: #2c5bf2;
     color: #fff;
-  }
-`;
-
-const Text = styled.p`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: 14px;
-  :hover {
-    cursor: pointer;
   }
 `;
