@@ -91,9 +91,9 @@ const LoginPage = () => {
             {passwordError && emailError ? (
               <Button>로그인</Button>
             ) : (
-              <Button disabled={true} style={{ cursor: "no-drop" }}>
+              <DisabledButton disabled={true} style={{ cursor: "no-drop" }}>
                 로그인
-              </Button>
+              </DisabledButton>
             )}
             <Link to="/signup" style={{ textDecoration: "none" }}>
               <Text>회원이 아니십니까?</Text>
@@ -164,10 +164,26 @@ const PasswordBox = styled.div`
 const Button = styled.button`
   width: 250px;
   height: 35px;
+  font-size: 15px;
+  font-weight: 600;
+  background-color: #fff;
+  border: 1px solid #b6b6b6;
+  border-radius: 5px;
   :hover {
+    cursor: pointer;
     background-color: #2c5bf2;
     color: #fff;
   }
+`;
+
+const DisabledButton = styled.button`
+  width: 250px;
+  height: 35px;
+  font-size: 15px;
+  font-weight: 600;
+  background-color: #fff;
+  border: 1px solid #b6b6b6;
+  border-radius: 5px;
 `;
 
 const Text = styled.p`

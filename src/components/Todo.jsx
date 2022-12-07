@@ -2,10 +2,11 @@ import { useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
 
-const Todo = ({ text, isComplete, id }) => {
+const Todo = ({ text, isCompleted, id }) => {
   const [isEdit, setIsEdit] = useState(false);
   const [editedTodo, setEditedTodo] = useState("");
   const [isChecked, setIsChecked] = useState(false);
+
   // todo 삭제
   const removeTodoHandler = () => {
     let token = localStorage.getItem("token");
@@ -62,14 +63,29 @@ const Todo = ({ text, isComplete, id }) => {
     setIsEdit(false);
   };
 
+  const EditCheckHandler = () => {
+    setIsChecked(!false);
+  };
+
   return (
     <MainWrapper>
       <TodoBox>
-        {isComplete ? (
-          <input type="checkbox" checked />
-        ) : (
-          <input type="checkbox" />
-        )}
+        <CheckboxBox>
+          {isCompleted ? (
+            <input
+              type="checkbox"
+              disabled={isEdit ? false : true}
+              checked={isEdit ? false : true}
+              onChange={EditCheckHandler}
+            />
+          ) : (
+            <input
+              type="checkbox"
+              disabled={isEdit ? false : true}
+              onChange={EditCheckHandler}
+            />
+          )}
+        </CheckboxBox>
         {isEdit ? (
           <input
             type="text"
@@ -79,12 +95,20 @@ const Todo = ({ text, isComplete, id }) => {
         ) : (
           <TextBox>{text}</TextBox>
         )}
-        <button onClick={updateTodoHandler}>수정</button>
-        {isEdit ? (
-          <button onClick={exitUpdateHandler}>취소</button>
-        ) : (
-          <button onClick={removeTodoHandler}>삭제</button>
-        )}
+        <ButtonBox>
+          <button className="edit" onClick={updateTodoHandler}>
+            수정
+          </button>
+          {isEdit ? (
+            <button className="exit" onClick={exitUpdateHandler}>
+              취소
+            </button>
+          ) : (
+            <button className="remove" onClick={removeTodoHandler}>
+              삭제
+            </button>
+          )}
+        </ButtonBox>
       </TodoBox>
     </MainWrapper>
   );
@@ -101,6 +125,44 @@ const TodoBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  margin: 5px 0;
 `;
-
+const CheckboxBox = styled.div`
+  margin: 0 5px;
+`;
 const TextBox = styled.div``;
+
+const ButtonBox = styled.div`
+  margin: 0 5px;
+  button {
+    width: 45px;
+    height: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    background-color: #fff;
+    border: 1px solid #b6b6b6;
+    border-radius: 5px;
+    margin-right: 3px;
+    :hover {
+      cursor: pointer;
+      background-color: #2c5bf2;
+      color: #fff;
+    }
+  }
+  .exit {
+    background-color: #d7d7d7;
+    :hover {
+      cursor: pointer;
+      background-color: #929292;
+      color: #000;
+    }
+  }
+  .remove {
+    background-color: #ffd2d2;
+    :hover {
+      cursor: pointer;
+      background-color: #f98181;
+      color: #fff;
+    }
+  }
+`;

@@ -87,9 +87,9 @@ const SignPage = () => {
             {passwordError && emailError ? (
               <Button>회원가입</Button>
             ) : (
-              <Button disabled={true} style={{ cursor: "no-drop" }}>
+              <DisabledButton disabled={true} style={{ cursor: "no-drop" }}>
                 회원가입
-              </Button>
+              </DisabledButton>
             )}
           </LoginForm>
         </LoginBox>
@@ -157,8 +157,24 @@ const PasswordBox = styled.div`
 const Button = styled.button`
   width: 250px;
   height: 35px;
+  font-size: 15px;
+  font-weight: 600;
+  background-color: #fff;
+  border: 1px solid #b6b6b6;
+  border-radius: 5px;
   :hover {
+    cursor: pointer;
     background-color: #2c5bf2;
     color: #fff;
   }
+`;
+
+const DisabledButton = styled.button`
+  width: 250px;
+  height: 35px;
+  font-size: 15px;
+  font-weight: 600;
+  background-color: #fff;
+  border: 1px solid #b6b6b6;
+  border-radius: 5px;
 `;
