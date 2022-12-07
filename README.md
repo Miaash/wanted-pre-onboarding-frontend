@@ -29,6 +29,6 @@
 <img width="1515" alt="스크린샷 2022-12-08 오전 2 29 06" src="https://user-images.githubusercontent.com/98681659/206250106-05ec1f71-a1dd-4c97-90e2-1b32d24a37e8.png">
 
 
-### 2. 데모 영상 (데모 영상은 배포 링크로 대체 가능하며, 배포 시 가산점이 부여됩니다.)
+### 2. 데모 영상 
 배포링크(vercel): https://wanted-pre-onboarding-proj.vercel.app/
 
