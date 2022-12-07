@@ -7,7 +7,6 @@ const TodoList = () => {
   const [todos, setTodos] = useState([]);
   const [newTodo, setNewTodo] = useState("");
 
-  // todo 조회
   useEffect(() => {
     let token = localStorage.getItem("token");
     axios
@@ -15,7 +14,6 @@ const TodoList = () => {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => {
-        console.log(res.data);
         setTodos(res.data);
       })
       .catch((err) => {
@@ -27,10 +25,8 @@ const TodoList = () => {
 
   const newTodoHandler = (e) => {
     setNewTodo(e.target.value);
-    console.log(e.target.value);
   };
 
-  // todo 생성
   const addNewTodoHandler = (e) => {
     e.preventDefault();
     let token = localStorage.getItem("token");
@@ -45,7 +41,6 @@ const TodoList = () => {
         }
       )
       .then((res) => {
-        console.log(res.data);
         alert("Todo가 작성되었습니다");
         window.location.reload();
       })
@@ -53,7 +48,6 @@ const TodoList = () => {
         if (err.response.data.statusCode === 400) {
           alert(err.response.data.message);
         }
-        console.log(err);
       });
   };
 

@@ -15,7 +15,6 @@ const Todo = ({ text, isCompleted, id }) => {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => {
-        console.log(res.data);
         alert("삭제되었습니다.");
         window.location.reload();
       })
@@ -23,11 +22,9 @@ const Todo = ({ text, isCompleted, id }) => {
         if (err.response.data.statusCode === 500) {
           alert(err.response.data.message);
         }
-        console.log(err);
       });
   };
 
-  // todo 수정
   const EditTodoHandler = (e) => {
     setEditedTodo(e.target.value);
   };
@@ -47,7 +44,6 @@ const Todo = ({ text, isCompleted, id }) => {
         }
       )
       .then((res) => {
-        console.log(res.data);
         alert("수정되었습니다.");
         window.location.reload();
       })
@@ -55,7 +51,6 @@ const Todo = ({ text, isCompleted, id }) => {
         if (err.response.data.statusCode === 500) {
           alert(err.response.data.message);
         }
-        console.log(err);
       });
   };
 
